@@ -1,6 +1,8 @@
 ﻿$(function () {
     //Azure
-    var URL = "http://customauthenticationservice.cloudapp.net/CustomAuthenticationDataService.svc"
+    
+        
+    //var URL = "http://customauthenticationservice.cloudapp.net/CustomAuthenticationDataService.svc"
     //Local Azure
     //var URL = "http://127.0.0.1:81/CustomAuthenticationDataService.svc"
 
@@ -9,7 +11,7 @@
 
     //Local webDev
     // Remember claims based security should be only be used over HTTPS  
-    //var URL = "http://localhost:54002/CustomAuthenticationDataService.svc"
+    var URL = "http://localhost:54002/CustomAuthenticationDataService.svc"
 
 
     DXTremeClient.currentUser = {
