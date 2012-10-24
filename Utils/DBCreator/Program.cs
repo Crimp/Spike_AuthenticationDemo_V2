@@ -11,7 +11,7 @@ namespace DBCreator {
         static void Main(string[] args) {
             Console.WriteLine("Create data base or update");
             try {
-#if Azure
+#if AzureRelease
                 string connectionString = ConfigurationManager.ConnectionStrings["AzureApplicationServices"].ConnectionString;
 #else
                 string connectionString = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;

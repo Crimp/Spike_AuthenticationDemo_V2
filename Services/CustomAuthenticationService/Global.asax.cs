@@ -13,7 +13,7 @@ namespace CustomAuthenticationService {
         public static string ConnectionString;
         protected void Application_Start(object sender, EventArgs e) {
             ValueManager.ValueManagerType = typeof(ASPRequestValueManager<>).GetGenericTypeDefinition();
-#if Azure
+#if AzureRelease
             ConnectionString = ConfigurationManager.ConnectionStrings["AzureApplicationServices"].ConnectionString;
 #else
             ConnectionString = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;

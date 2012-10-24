@@ -15,7 +15,11 @@ namespace ClientServer_Wcf_StandartAuth.Server {
     public class Global : System.Web.HttpApplication {
         public static string ConnectionString;
         protected void Application_Start(object sender, EventArgs e) {
+#if AzureRelease
+            ConnectionString = ConfigurationManager.ConnectionStrings["AzureApplicationServices"].ConnectionString;
+#else
             ConnectionString = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
+#endif
             CustomAuthenticationServiceHelper customAuthenticationServiceHelper = new CustomAuthenticationServiceHelper();
             ValueManager.ValueManagerType = typeof(ASPRequestValueManager<>).GetGenericTypeDefinition();
             QueryRequestSecurityStrategyHandler securityProviderHandler = delegate() {

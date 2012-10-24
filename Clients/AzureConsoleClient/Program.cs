@@ -12,17 +12,20 @@ using System.Xml.Linq;
 
 namespace ConsoleClient {
     class Program {
-        //Azure
+#if AzureRelease
         public static string customAuthenticationRootDataUrl = "http://customauthenticationservice.cloudapp.net/CustomAuthenticationDataService.svc";
-        //Local Azure
-        //public static string customAuthenticationRootDataUrl = "http://127.0.0.1:81/CustomAuthenticationDataService.svc";
-
+#else
+#if AzureDebug
+        public static string customAuthenticationRootDataUrl = "http://127.0.0.1:81/CustomAuthenticationDataService.svc";
+#else
         //Local IIS
         //public static string customAuthenticationRootDataUrl = "http://localhost/CustomAuthenticationService/CustomAuthenticationDataService.svc";
 
         //Local webDev
         // Remember claims based security should be only be used over HTTPS  
-        //public static string customAuthenticationRootDataUrl = "http://localhost:54002/CustomAuthenticationDataService.svc";
+        public static string customAuthenticationRootDataUrl = "http://localhost:54002/CustomAuthenticationDataService.svc";
+#endif
+#endif
         static void Main(string[] args) {
             Console.WriteLine("CustomAuthentication for user 'Sam'");
             DataServiceContext customAuthenticationDataContext = new DataServiceContext(new Uri(customAuthenticationRootDataUrl));
