@@ -34,6 +34,7 @@ namespace CustomAuthenticationService {
 
             CustomAuthenticationServiceHelper hellper = new CustomAuthenticationServiceHelper();
             try {
+#if Azure
                 //Calling Cross Domain WCF Service using Jquery
                 HttpContext.Current.Response.AddHeader("Access-Control-Allow-Origin", "*");
                 if(HttpContext.Current.Request.HttpMethod == "OPTIONS") {
@@ -42,7 +43,8 @@ namespace CustomAuthenticationService {
                     HttpContext.Current.Response.AddHeader("Access-Control-Allow-Headers", "Content-Type, Accept");
                     HttpContext.Current.Response.AddHeader("Access-Control-Max-Age", "1728000");
                     HttpContext.Current.Response.End();
-                }
+                }            
+#endif
                 SecuritySystem.Instance.Logon(hellper.ObjectSpaceProvider.CreateObjectSpace());
             }
             catch(AuthenticationException) {

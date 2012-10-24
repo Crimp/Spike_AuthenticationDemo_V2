@@ -40,6 +40,10 @@
     <DebugSymbols>false</DebugSymbols>
     <OutputPath>output\</OutputPath>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'AzureDebug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\AzureDebug\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <Content Include="App.js" />
     <Content Include="App.html" />
