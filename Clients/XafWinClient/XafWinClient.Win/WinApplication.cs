@@ -12,6 +12,11 @@ namespace XafWinClient.Win {
             InitializeComponent();
             DelayedViewItemsInitialization = true;
         }
+#if Azure
+        protected override void CheckCompatibilityCore() {
+            //base.CheckCompatibilityCore();
+        }
+#endif
         private void XafWinClientWindowsFormsApplication_DatabaseVersionMismatch(object sender, DevExpress.ExpressApp.DatabaseVersionMismatchEventArgs e) {
             throw new InvalidOperationException(
                 "The application cannot connect to the specified database, because the latter doesn't exist or its version is older than that of the application.\r\n" +
