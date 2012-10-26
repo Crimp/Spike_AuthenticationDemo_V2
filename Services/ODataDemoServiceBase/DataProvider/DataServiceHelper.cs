@@ -64,10 +64,16 @@ namespace DataProvider {
                 return _xPDictionary;
             }
         }
-
+        NonPersistentExportedTypeHelper nonPersistentExportedTypeHelper;
+        XpoExportedTypeHelper xpoExportedTypeHelper;
         public virtual Boolean IsExportedType(Type type) {
-            return NonPersistentEntityStore.IsExportedType(type) || XpoTypeInfoSource.IsExportedType(type);
-            //return ExportedTypeHelpers.IsExportedType(type);
+            if(nonPersistentExportedTypeHelper == null) {
+                nonPersistentExportedTypeHelper = new NonPersistentExportedTypeHelper();
+            }
+            if(xpoExportedTypeHelper == null) {
+                xpoExportedTypeHelper = new XpoExportedTypeHelper();
+            }
+            return nonPersistentExportedTypeHelper.IsExportedType(type) || xpoExportedTypeHelper.IsExportedType(type);
         }
         public virtual IObjectLayer CreateDataLayer() {
             SessionObjectLayer sessionObjectLayer = new SessionObjectLayer(CreateSession(AutoCreateOption.SchemaAlreadyExists), true, null, CreateSecurityRuleProvider(), null);

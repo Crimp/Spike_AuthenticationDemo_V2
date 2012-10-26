@@ -36,14 +36,16 @@ namespace XafWinClient.Win {
             //string connectionString = "http://127.0.0.1:81/CustomWcfSecuredDataServer.svc";
 #endif
 #endif
-            string connectionString = "http://localhost:63829/CustomWcfSecuredDataServer.svc";
+            string connectionString = "http://minakov-w8.corp.devexpress.com/ClientServer_Wcf_CustomAuth.Service/CustomWcfSecuredDataServer.svc";
             //
 
 
             try {
                 EndpointAddress endpointAddress = new EndpointAddress(connectionString);
+                BasicHttpBinding bh = new BasicHttpBinding();
+                System.ServiceModel.Channels.Binding b = WcfDataServerHelper.CreateDefaultBinding();
                 WcfSecuredDataServerClient clientDataServer = new WcfSecuredDataServerClient(
-                    WcfDataServerHelper.CreateDefaultBinding(), endpointAddress);
+                    b, endpointAddress);
 
                 ServerSecurityClient securityClient = new ServerSecurityClient(clientDataServer, new ClientInfoFactory());
                 winApplication.ApplicationName = "ClientServer_CustomAuth";
