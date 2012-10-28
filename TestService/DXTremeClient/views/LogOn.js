@@ -15,6 +15,7 @@
             dataType: DataType, //Expected data format from server
             processdata: ProcessData, //True or False
             success: function (msg) {//On Successfull service call
+                alert(msg.GetDataResult);
                 //ServiceSucceeded(msg);
             },
             error: ServiceFailed// When Service call fails
@@ -37,7 +38,7 @@
         Password: ko.observable(""),
         UserName: ko.observable(""),
         handleLogOnClick: function (e) {
-            var userid = 1;
+            var userid = viewModel.UserName();
             Type = "POST";
             Url = "http://localhost:49327/Service1.svc/GetData";
             Data = '{"value": "' + userid + '"}';
