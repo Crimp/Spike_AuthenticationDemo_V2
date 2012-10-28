@@ -16,7 +16,7 @@ namespace ConsoleApplication2.ServiceReference1 {
     public interface IService1 {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IService1/GetData", ReplyAction="http://tempuri.org/IService1/GetDataResponse")]
-        string GetData(int value);
+        string GetData(string value);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -46,7 +46,7 @@ namespace ConsoleApplication2.ServiceReference1 {
                 base(binding, remoteAddress) {
         }
         
-        public string GetData(int value) {
+        public string GetData(string value) {
             return base.Channel.GetData(value);
         }
     }

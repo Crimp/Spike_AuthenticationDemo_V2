@@ -27,45 +27,51 @@
         Type = null; varUrl = null; Data = null; ContentType = null; DataType = null; ProcessData = null;
     };
     //<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/"><s:Body><GetData xmlns="http://tempuri.org/"><value>10</value></GetData></s:Body></s:Envelope>
-    var bhRequest = "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">" +
-            "<s:Body>" +
-            "<GetData xmlns=\"http://tempuri.org/\">" +
-            "<value>10</value>" +
-            "</GetData>" +
-            "</s:Body>" +
-        "</s:Envelope>";
+    //var bhRequest = "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">" +
+    //        "<s:Body>" +
+    //        "<GetData xmlns=\"http://tempuri.org/\">" +
+    //        "<value>145455430</value>" +
+    //        "</GetData>" +
+    //        "</s:Body>" +
+    //    "</s:Envelope>";
     var viewModel = {
         Password: ko.observable(""),
         UserName: ko.observable(""),
         handleLogOnClick: function (e) {
-            var userid = viewModel.UserName();
-            Type = "POST";
-            Url = "http://localhost:49327/Service1.svc/GetData";
-            Data = '{"value": "' + userid + '"}';
-            ContentType = "application/json; charset=utf-8";
-            DataType = "json";
-            varProcessData = true;
-            CallService();
-            //$.ajax({
-            //    type: "POST",
-            //    url: "http://localhost:49327/Service1.svc",
-            //    data: bhRequest,
-            //    timeout: 10000,
-            //    contentType: "text/xml",
-            //    dataType: "xml",
-            //    beforeSend: function (xhr) {
-            //        xhr.setRequestHeader("SOAPAction", "http://tempuri.org/IService/GetData");
-            //    },
-            //    success: function (data) {
-            //        $(data).find("GetDataResponse").each(function () {
-            //            alert($(this).find("GetDataResult").text());
-            //        });
-            //    },
-            //    error: function (xhr, status, error) {
-            //        alert(error);
+            //var userid = viewModel.UserName();
+            //Type = "POST";
+            //Url = "http://localhost:49327/Service1.svc/GetData";
+            //Data = '{"value": "' + userid + '"}';
+            //ContentType = "application/json; charset=utf-8";
+            //DataType = "json";
+            //varProcessData = true;
+            //CallService();
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:49327/Service1.svc",
+                data: "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">" +
+                        "<s:Body>" +
+                        "<GetData xmlns=\"http://tempuri.org/\">" +
+                        "<value>"+viewModel.UserName()+"</value>" +
+                        "</GetData>" +
+                        "</s:Body>" +
+                    "</s:Envelope>",
+                timeout: 10000,
+                contentType: "text/xml",
+                dataType: "xml",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("SOAPAction", '"http://tempuri.org/IService1/GetData"');
+                },
+                success: function (data) {
+                    $(data).find("GetDataResponse").each(function () {
+                        alert($(this).find("GetDataResult").text());
+                    });
+                },
+                error: function (xhr, status, error) {
+                    alert(error);
 
-            //    }
-            //});
+                }
+            });
         }
     };
     return viewModel;
