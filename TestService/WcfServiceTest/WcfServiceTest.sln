@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfServiceTest", "WcfServic
 EndProject
 Project("{1B19158F-E398-40A6-8E3B-350508E125F1}") = "DXTremeClient", "..\DXTremeClient\DXTremeClient.dxjsproj", "{61F3EC2C-3F18-4827-9FCF-EB6D64822EAE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication2", "ConsoleApplication2\ConsoleApplication2.csproj", "{6AB01F1C-4A98-4FA1-B4CE-AA7D1D360A99}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		AzureDebug|Any CPU = AzureDebug|Any CPU
@@ -41,6 +43,18 @@ Global
 		{61F3EC2C-3F18-4827-9FCF-EB6D64822EAE}.Release|Any CPU.ActiveCfg = Release|x86
 		{61F3EC2C-3F18-4827-9FCF-EB6D64822EAE}.Release|x86.ActiveCfg = Release|x86
 		{61F3EC2C-3F18-4827-9FCF-EB6D64822EAE}.Release|x86.Build.0 = Release|x86
+		{6AB01F1C-4A98-4FA1-B4CE-AA7D1D360A99}.AzureDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AB01F1C-4A98-4FA1-B4CE-AA7D1D360A99}.AzureDebug|Any CPU.Build.0 = Debug|Any CPU
+		{6AB01F1C-4A98-4FA1-B4CE-AA7D1D360A99}.AzureDebug|x86.ActiveCfg = Debug|Any CPU
+		{6AB01F1C-4A98-4FA1-B4CE-AA7D1D360A99}.AzureRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{6AB01F1C-4A98-4FA1-B4CE-AA7D1D360A99}.AzureRelease|Any CPU.Build.0 = Release|Any CPU
+		{6AB01F1C-4A98-4FA1-B4CE-AA7D1D360A99}.AzureRelease|x86.ActiveCfg = Release|Any CPU
+		{6AB01F1C-4A98-4FA1-B4CE-AA7D1D360A99}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6AB01F1C-4A98-4FA1-B4CE-AA7D1D360A99}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6AB01F1C-4A98-4FA1-B4CE-AA7D1D360A99}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{6AB01F1C-4A98-4FA1-B4CE-AA7D1D360A99}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6AB01F1C-4A98-4FA1-B4CE-AA7D1D360A99}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6AB01F1C-4A98-4FA1-B4CE-AA7D1D360A99}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
