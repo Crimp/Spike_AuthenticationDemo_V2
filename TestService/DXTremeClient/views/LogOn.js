@@ -25,18 +25,45 @@
         alert('Service call failed: ' + result.status + '' + result.statusText);
         Type = null; varUrl = null; Data = null; ContentType = null; DataType = null; ProcessData = null;
     };
+    var bhRequest = "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">" +
+            "<s:Body>" +
+            "<GetData xmlns=\"http://tempuri.org/\">" +
+            "<value>10</value>" +
+            "</GetData>" +
+            "</s:Body>" +
+        "</s:Envelope>";
     var viewModel = {
         Password: ko.observable(""),
         UserName: ko.observable(""),
         handleLogOnClick: function (e) {
-            var userid = 1;
-            Type = "POST";
-            Url = "http://localhost:61340/Service1.svc/GetData";
-            Data = '{"value": "' + userid + '"}';
-            ContentType = "application/json; charset=utf-8";
-            DataType = "json";
-            varProcessData = true;
-            CallService();
+            //var userid = 1;
+            //Type = "POST";
+            //Url = "http://localhost:61340/Service1.svc/GetData";
+            //Data = '{"value": "' + userid + '"}';
+            //ContentType = "text/xml; charset=utf-8";
+            //DataType = "xml";
+            //varProcessData = true;
+            //CallService();
+            $.ajax({
+                type: "POST",
+                url: "http://crimp/test/Service1.svc/GetData",
+                data: bhRequest,
+                timeout: 10000,
+                contentType: "text/xml",
+                dataType: "xml",
+                beforeSend: function (xhr) {
+                    xhr.setRequestHeader("SOAPAction", "http://tempuri.org/IService/GetData");
+                },
+                success: function (data) {
+                    $(data).find("GetDataResponse").each(function () {
+                        alert($(this).find("GetDataResult").text());
+                    });
+                },
+                error: function (xhr, status, error) {
+                    alert(error);
+
+                }
+            });
         }
     };
     return viewModel;
