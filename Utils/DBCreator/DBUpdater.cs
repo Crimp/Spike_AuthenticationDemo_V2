@@ -64,6 +64,7 @@ namespace DBCreator {
             AddNewUser("Sam", "Tellitson", "sam_tellitson@md.com", "");
             AddNewUser("John", "Nilsen", "john_nilsen@md.com", "");
             AddNewUser(WindowsIdentity.GetCurrent().Name, "", "", "");
+            AddNewUser("Test2", "Test2", "Test2@md.com", "Test2");
 
             objectSpace.CommitChanges();
         }
