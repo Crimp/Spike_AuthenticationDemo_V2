@@ -18,6 +18,7 @@ using DevExpress.Xpo.Exceptions;
 namespace DataProvider {
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
     public class DataServiceBase : XpoDataServiceV3, System.Data.Services.IRequestHandler {
+        private static List<string> serviceOperations = new List<string>();
         private DataServiceHelper _dataServiceHelper;
         public DataServiceBase(HttpContextBase httpContext, DataServiceHelper dataServiceHelper, string containerName) :
             base(new XpoContext(containerName, dataServiceHelper.NamespaceName, dataServiceHelper.CreateDataLayer())) {
@@ -28,6 +29,9 @@ namespace DataProvider {
         }
         public static void InitializeService(DataServiceConfiguration config) {
             config.SetEntitySetAccessRule("*", EntitySetRights.All);
+            foreach(string serviceOperationName in serviceOperations) {
+                config.SetServiceOperationAccessRule(serviceOperationName, ServiceOperationRights.AllRead);
+            }
             config.DataServiceBehavior.MaxProtocolVersion = DataServiceProtocolVersion.V2;
             config.DataServiceBehavior.AcceptProjectionRequests = true;
         }
@@ -42,6 +46,10 @@ namespace DataProvider {
                 args.Exception = new DataServiceException(403, args.Exception.Message);
             }
             base.HandleException(args);
+        }
+
+        public static void AddServiceOperation(string serviceOperationName) {
+            serviceOperations.Add(serviceOperationName);
         }
     }
 }

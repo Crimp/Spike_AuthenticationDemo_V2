@@ -12,8 +12,11 @@ namespace WcfServiceTest {
     // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Allowed)]
     public class Service1 : IService1 {
-        public string GetData(string value) {
+        public string IsGranted(string value) {
             return string.Format("You entered: {0}", value);
-       } 
+        }
+        public string GetData(string value) {
+            return "rerer" + value;
+        }
     }
 }

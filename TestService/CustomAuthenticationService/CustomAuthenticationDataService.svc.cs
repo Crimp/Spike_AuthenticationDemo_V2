@@ -1,5 +1,7 @@
 using BusinessObjectsLibrary;
 using DataProvider;
+using DevExpress.ExpressApp;
+using DevExpress.ExpressApp.Security;
 using System;
 using System.Collections.Generic;
 using System.Data.Services;
@@ -11,6 +13,9 @@ using System.Web;
 
 namespace CustomAuthenticationService {
     public class CustomAuthenticationDataService : DataServiceBase {
+        static CustomAuthenticationDataService() {
+            AddServiceOperation("IsGranted");
+        }
         public CustomAuthenticationDataService()
             : this(new HttpContextWrapper(HttpContext.Current)) {
         }
@@ -19,6 +24,10 @@ namespace CustomAuthenticationService {
         }
         public CustomAuthenticationDataService(HttpContextBase httpContext, DataServiceHelper dataServiceHelper, string containerName)
             : base(httpContext, dataServiceHelper, containerName) {
+        }
+        [WebInvoke(Method = "POST")]
+        public bool IsGranted(string objectType, string memberName, string objectHandle, string operation) {
+            return ((IRequestSecurity)SecuritySystem.Instance).IsGranted(new ClientPermissionRequest(Type.GetType(objectType), memberName, objectHandle, operation));
         }
     }
 }

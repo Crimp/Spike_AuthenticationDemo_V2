@@ -38,16 +38,16 @@
         Password: ko.observable(""),
         UserName: ko.observable(""),
         handleLogOnClick: function (e) {
-            //var userid = viewModel.UserName();
-            //Type = "POST";
-            //Url = "http://localhost:49327/Service1.svc/GetData";
-            //Data = '{"value": "' + userid + '"}';
-            //ContentType = "application/json; charset=utf-8";
-            //DataType = "json";
-            //varProcessData = true;
-            //CallService();
+            var userid = viewModel.UserName();
+            Type = "POST";
+            Url = "http://localhost:49327/Service1.svc/GetData";
+            Data = '{"value": "' + userid + '"}';
+            ContentType = "application/json; charset=utf-8";
+            DataType = "json";
+            varProcessData = true;
+            CallService();
             var test = DataManipulationRight();
-            test.test(viewModel.UserName());
+            //test.test(viewModel.UserName());
         }
     };
     return viewModel;

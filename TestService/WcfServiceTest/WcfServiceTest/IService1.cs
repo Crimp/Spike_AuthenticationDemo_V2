@@ -13,7 +13,11 @@ namespace WcfServiceTest {
 
         [OperationContract]
         //[WebInvoke(Method = "GET", ResponseFormat = WebMessageFormat.Json)]
-        //[WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
+        string IsGranted(string objectType);
+
+        [OperationContract]
+        [WebInvoke(Method = "POST", BodyStyle = WebMessageBodyStyle.Wrapped, ResponseFormat = WebMessageFormat.Json)]
         string GetData(string value);
     }
 }

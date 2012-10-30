@@ -7,17 +7,19 @@
         handleBackClick: function (e) {
             DXTremeClient.app.navigate("_back");
         },
+        canEdit: canEdit = function (e) {
+            var test = DataManipulationRight("http://localhost:54002/CustomAuthenticationDataService.svc");
+            return test.IsGranted("BusinessObjectsLibrary.Contact", "", "BusinessObjectsLibrary.Contact(" + params.oid + ")", "Write");
+        },
         handleEditClick: function (e) {
-            //var test = DataManipulationRight("http://localhost:63829/CustomWcfSecuredDataServer.svc");
-            //var clientInfo = ClientInfo(DXTremeClient.currentUser.UserName(), DXTremeClient.currentUser.Password(), "b2d97420-c6ca-4dfc-8c19-41a6ed7d3069");
-            //var clientPermissionRequest = ClientPermissionRequest("Write", "BusinessObjectsLibrary.Contact", "BusinessObjectsLibrary.Contact(" + _oid + ")");
-            //test.IsGrantedBatch(clientInfo, clientPermissionRequest);
-            var uri = DXTremeClient.app.router.format({
-                action: "ContactEditView",
-                oid: _oid,
-                index: _oid
-            });
-            DXTremeClient.app.navigate(uri);
+            if (canEdit()) { //TODO Minakov
+                var uri = DXTremeClient.app.router.format({
+                    action: "ContactEditView",
+                    oid: _oid,
+                    index: _oid
+                });
+                DXTremeClient.app.navigate(uri);
+            }
         },
         viewShown: function () {
             DXTremeClient.db.Contact.load({
@@ -32,6 +34,5 @@
         model.Email(list[0].Email);
         _oid = list[0].oid;
     };
-
     return model;
 }
