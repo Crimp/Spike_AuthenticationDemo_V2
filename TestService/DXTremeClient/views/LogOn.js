@@ -46,32 +46,8 @@
             //DataType = "json";
             //varProcessData = true;
             //CallService();
-            $.ajax({
-                type: "POST",
-                url: "http://localhost:49327/Service1.svc",
-                data: "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\">" +
-                        "<s:Body>" +
-                        "<GetData xmlns=\"http://tempuri.org/\">" +
-                        "<value>"+viewModel.UserName()+"</value>" +
-                        "</GetData>" +
-                        "</s:Body>" +
-                    "</s:Envelope>",
-                timeout: 10000,
-                contentType: "text/xml",
-                dataType: "xml",
-                beforeSend: function (xhr) {
-                    xhr.setRequestHeader("SOAPAction", '"http://tempuri.org/IService1/GetData"');
-                },
-                success: function (data) {
-                    $(data).find("GetDataResponse").each(function () {
-                        alert($(this).find("GetDataResult").text());
-                    });
-                },
-                error: function (xhr, status, error) {
-                    alert(error);
-
-                }
-            });
+            var test = DataManipulationRight();
+            test.test(viewModel.UserName());
         }
     };
     return viewModel;

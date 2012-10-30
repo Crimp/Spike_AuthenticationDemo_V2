@@ -8,6 +8,10 @@
             DXTremeClient.app.navigate("_back");
         },
         handleEditClick: function (e) {
+            //var test = DataManipulationRight("http://localhost:63829/CustomWcfSecuredDataServer.svc");
+            //var clientInfo = ClientInfo(DXTremeClient.currentUser.UserName(), DXTremeClient.currentUser.Password(), "b2d97420-c6ca-4dfc-8c19-41a6ed7d3069");
+            //var clientPermissionRequest = ClientPermissionRequest("Write", "BusinessObjectsLibrary.Contact", "BusinessObjectsLibrary.Contact(" + _oid + ")");
+            //test.IsGrantedBatch(clientInfo, clientPermissionRequest);
             var uri = DXTremeClient.app.router.format({
                 action: "ContactEditView",
                 oid: _oid,

@@ -16,7 +16,7 @@ namespace CustomAuthenticationService {
 #if AzureRelease
             ConnectionString = ConfigurationManager.ConnectionStrings["AzureApplicationServices"].ConnectionString;
 #else
-            ConnectionString = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
+            ConnectionString = ConfigurationManager.ConnectionStrings["ApplicationServices_IIS"].ConnectionString;
 #endif
         }
         protected void Session_Start(object sender, EventArgs e) { }

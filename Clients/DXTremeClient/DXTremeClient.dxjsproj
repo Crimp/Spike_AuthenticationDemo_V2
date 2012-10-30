@@ -53,6 +53,9 @@
     <Content Include="App.html" />
     <Content Include="App.css" />
     <Content Include="css\dxtreme-12.2.0.css" />
+    <Content Include="data\DataManipulationRight.js">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="data\db.js" />
     <Content Include="layouts\Navbar\NavbarLayout.css" />
     <Content Include="layouts\Navbar\NavbarLayout.html" />
