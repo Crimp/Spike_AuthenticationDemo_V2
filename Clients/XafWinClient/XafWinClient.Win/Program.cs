@@ -45,7 +45,7 @@ namespace XafWinClient.Win {
                 BasicHttpBinding bh = new BasicHttpBinding();
                 System.ServiceModel.Channels.Binding b = WcfDataServerHelper.CreateDefaultBinding();
                 WcfSecuredDataServerClient clientDataServer = new WcfSecuredDataServerClient(
-                    bh, endpointAddress);
+                    b, endpointAddress);
 
                 ServerSecurityClient securityClient = new ServerSecurityClient(clientDataServer, new ClientInfoFactory());
                 winApplication.ApplicationName = "ClientServer_CustomAuth";
