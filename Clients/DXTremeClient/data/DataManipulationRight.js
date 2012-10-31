@@ -21,7 +21,8 @@ var DataManipulationRight = NewClass({
 }, function (serviceUrl) {
     this.serviceUrl = serviceUrl;
 }, {
-    "IsGranted": function (objectType, memberName, objectHandle, operation, callbackHandler) {
+    "IsGranted": function (objectType, memberName, oid, operation, callbackHandler) {
+        var objectHandle = objectType + "(" + oid + ")";
         var _data = "objectType='" + objectType + "'&memberName='" + memberName + "'&objectHandle='" + objectHandle + "'&operation='" + operation + "'";
         this.ajaxRequest(_data, "IsGranted", callbackHandler);
     },
@@ -47,7 +48,6 @@ var DataManipulationRight = NewClass({
                 }
             },
             error: function (xhr, status, error) {
-                alert(error);
                 if (callbackHandler) {
                     callbackHandler(false);
                 }

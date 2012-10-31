@@ -8,7 +8,7 @@
             DXTremeClient.app.navigate("_back");
         },
         canEdit: canEdit = function (callbackHandler) {
-            DXTremeClient.DataManipulationRight.IsGranted("BusinessObjectsLibrary.Contact", "", "BusinessObjectsLibrary.Contact(" + params.oid + ")", "Write", callbackHandler);
+            DXTremeClient.DataManipulationRight.IsGranted(DXTremeClient.entities.Contact.className, "", params.oid, "Write", callbackHandler);
         },
         handleEditClick: function (e) {
             if (CanEdit()) {

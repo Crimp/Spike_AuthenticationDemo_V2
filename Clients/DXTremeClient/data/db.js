@@ -3,7 +3,11 @@
         Password: ko.observable(""),
         UserName: ko.observable("")
     };
+    DXTremeClient.entities = {
+        Contact: { key: "oid", className: "BusinessObjectsLibrary.Contact" }
+    };
     DXTremeClient.db = new DevExpress.data.EntityStoreContext({
+        test: "",
         service: {
             url: DXTremeClient.serviceUrl,
             errorHandler: function (error) {
@@ -25,10 +29,10 @@
             beforeSend: function (sender) {
                 sender.params.UserName = DXTremeClient.currentUser.UserName();
                 sender.params.Password = DXTremeClient.currentUser.Password();
-            }
+            },
         },
         entities: {
-            Contact: { key: "oid" }
+            Contact: { key: DXTremeClient.entities.Contact.key }
         }
     });
     DXTremeClient.db.addErrorHandler = function (handler) {
