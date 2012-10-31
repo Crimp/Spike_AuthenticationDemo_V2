@@ -8,11 +8,18 @@
                 DXTremeClient.currentUser.Password(viewModel.Password())
                 DXTremeClient.DataManipulationRight.IsUserAllowed(isUserAllowed);
             }
-        }
+        },
+        hideOverlay: function () {
+            var overlay = $("#logonFailedoverlay").data("dxOverlay");
+            overlay.hide();
+        },
     };
     var isUserAllowed = function (userAllowed) {
         if (userAllowed) {
             DXTremeClient.app.navigate("");
+        } else {
+            var overlay = $("#logonFailedoverlay").data("dxOverlay");
+            overlay.show();
         }
     };
     return viewModel;
