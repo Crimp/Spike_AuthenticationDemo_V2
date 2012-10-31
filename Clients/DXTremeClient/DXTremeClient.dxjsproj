@@ -57,6 +57,9 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="data\db.js" />
+    <Content Include="images\myPhoto.jpg">
+      <SubType>Content</SubType>
+    </Content>
     <Content Include="layouts\Navbar\NavbarLayout.css" />
     <Content Include="layouts\Navbar\NavbarLayout.html" />
     <Content Include="layouts\Navbar\NavbarLayout.js" />
@@ -97,6 +100,7 @@
     <Folder Include="js\" />
     <Folder Include="layouts\" />
     <Folder Include="layouts\Navbar\" />
+    <Folder Include="images" />
     <Folder Include="views\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />

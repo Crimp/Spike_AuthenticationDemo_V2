@@ -39,6 +39,7 @@ var DataManipulationRight = NewClass({
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             beforeSend: function (sender) {
+                sender.setRequestHeader("Accept", "application/json;odata=verbose");
                 sender.setRequestHeader("UserName", DXTremeClient.currentUser.UserName());
                 sender.setRequestHeader("Password", DXTremeClient.currentUser.Password());
             },

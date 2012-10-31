@@ -3297,6 +3297,18 @@
   background: #fff;
 }
 
+.contact-icon {
+    display: inline-block;
+}
+.contact-info {
+    display: inline-block;
+}
+.contact-FirstName {
+    font-weight: bold;
+}
+.contact-LastName {
+    font-weight: normal;
+}
 
 #showButton, #hideButton {
   margin-top: 25px;

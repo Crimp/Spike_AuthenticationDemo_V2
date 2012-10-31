@@ -14,6 +14,7 @@ using DevExpress.Xpo.Metadata;
 using DevExpress.Data.Filtering;
 using DevExpress.ExpressApp.Security.Strategy;
 using DevExpress.Xpo.Exceptions;
+using System.ServiceModel.Web;
 
 namespace DataProvider {
     [AspNetCompatibilityRequirements(RequirementsMode = AspNetCompatibilityRequirementsMode.Required)]
@@ -32,7 +33,7 @@ namespace DataProvider {
             foreach(string serviceOperationName in serviceOperations) {
                 config.SetServiceOperationAccessRule(serviceOperationName, ServiceOperationRights.AllRead);
             }
-            config.DataServiceBehavior.MaxProtocolVersion = DataServiceProtocolVersion.V2;
+            config.DataServiceBehavior.MaxProtocolVersion = DataServiceProtocolVersion.V3;
             config.DataServiceBehavior.AcceptProjectionRequests = true;
         }
         public DataServiceHelper DataServiceHelper {
