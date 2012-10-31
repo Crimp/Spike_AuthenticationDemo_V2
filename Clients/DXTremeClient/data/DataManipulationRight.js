@@ -23,9 +23,15 @@ var DataManipulationRight = NewClass({
 }, {
     "IsGranted": function (objectType, memberName, objectHandle, operation, callbackHandler) {
         var _data = "objectType='" + objectType + "'&memberName='" + memberName + "'&objectHandle='" + objectHandle + "'&operation='" + operation + "'";
+        this.ajaxRequest(_data, "IsGranted", callbackHandler);
+    },
+    "IsUserAllowed": function (callbackHandler) {
+        this.ajaxRequest(null, "IsUserAllowed", callbackHandler);
+    },
+    "ajaxRequest": function (_data, serviceOperationName, callbackHandler) {
         $.ajax({
             type: "GET",
-            url: this.serviceUrl + "/IsGranted",
+            url: this.serviceUrl + "/" + serviceOperationName,
             data: _data,
             async: true,
             timeout: 10000,
@@ -37,7 +43,7 @@ var DataManipulationRight = NewClass({
             },
             success: function (data) {
                 if (callbackHandler) {
-                    callbackHandler(data.d.IsGranted);
+                    callbackHandler(data.d[serviceOperationName]);
                 }
             },
             error: function (xhr, status, error) {

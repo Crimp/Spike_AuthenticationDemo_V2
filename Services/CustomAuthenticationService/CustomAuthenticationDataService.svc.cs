@@ -16,6 +16,7 @@ namespace CustomAuthenticationService {
     public class CustomAuthenticationDataService : DataServiceBase {
         static CustomAuthenticationDataService() {
             AddServiceOperation("IsGranted");
+            AddServiceOperation("IsUserAllowed");
         }
         public CustomAuthenticationDataService()
             : this(new HttpContextWrapper(HttpContext.Current)) {
@@ -31,6 +32,10 @@ namespace CustomAuthenticationService {
             Type test = Type.GetType(objectType);
             Type test2 = XafTypesInfo.Instance.FindTypeInfo(objectType).Type;
             return ((IRequestSecurity)SecuritySystem.Instance).IsGranted(new ClientPermissionRequest(test2, memberName, objectHandle, operation));
+        }
+        [WebGet]
+        public bool IsUserAllowed() {
+            return true;
         }
     }
 }
