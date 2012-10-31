@@ -1,9 +1,11 @@
 ﻿using DevExpress.Persistent.Base;
 using DevExpress.Persistent.BaseImpl;
 using DevExpress.Xpo;
+using DevExpress.Xpo.Metadata;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -43,6 +45,11 @@ namespace BusinessObjectsLibrary {
             set {
                 SetPropertyValue("Email", ref email, value);
             }
+        }
+        [Size(SizeAttribute.Unlimited), Delayed(true), ValueConverter(typeof(ImageValueConverter))]
+        public Image Photo {
+            get { return GetDelayedPropertyValue<Image>("Photo"); }
+            set { SetDelayedPropertyValue<Image>("Photo", value); }
         }
         [Browsable(false)]
         public Guid OwnerId {

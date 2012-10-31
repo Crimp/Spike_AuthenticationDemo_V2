@@ -36,7 +36,7 @@ namespace XafWinClient.Win {
             //string connectionString = "http://127.0.0.1:81/CustomWcfSecuredDataServer.svc";
 #endif
 #endif
-            string connectionString = "http://minakov-w8.corp.devexpress.com/ClientServer_Wcf_CustomAuth.Service/CustomWcfSecuredDataServer.svc";
+            string connectionString = "http://localhost:63829/CustomWcfSecuredDataServer.svc";
             //
 
 

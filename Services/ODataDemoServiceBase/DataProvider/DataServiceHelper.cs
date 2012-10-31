@@ -37,6 +37,7 @@ namespace DataProvider {
                     ITypesInfo info = XpoTypesInfoHelper.GetTypesInfo();
                     List<Assembly> _assemblies = new List<Assembly>(Assemblies);
                     _assemblies.Add(typeof(SecuritySystemUser).Assembly);
+                    _assemblies.Add(typeof(DevExpress.ExpressApp.Xpo.Updating.ModuleInfo).Assembly);
 
                     foreach(Assembly ass in _assemblies) {
                         foreach(Type type in ModuleHelper.CollectExportedTypesFromAssembly(ass, IsExportedType)) {

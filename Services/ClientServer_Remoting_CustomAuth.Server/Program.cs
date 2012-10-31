@@ -17,7 +17,7 @@ namespace ClientServer_Remoting_StandardAuth.Server {
     static class Program {
         static void Main(string[] args) {
             try {
-                string connectionString = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
+                string connectionString = ConfigurationManager.ConnectionStrings["ApplicationServices_IIS"].ConnectionString;
 
                 ValueManager.ValueManagerType = typeof(MultiThreadValueManager<>).GetGenericTypeDefinition();
 
