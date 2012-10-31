@@ -21,8 +21,8 @@ var DataManipulationRight = NewClass({
 }, function (serviceUrl) {
     this.serviceUrl = serviceUrl;
 }, {
-    "IsGranted": function (objectType, memberName, objectHandle, operation) {
-        var _data = "objectType='" + objectType + "'&memberName='" + memberName + "'&objectHandle='" + objectHandle + "'&operation='" + operation +"'";
+    "IsGranted": function (objectType, memberName, objectHandle, operation, callbackHandler) {
+        var _data = "objectType='" + objectType + "'&memberName='" + memberName + "'&objectHandle='" + objectHandle + "'&operation='" + operation + "'";
         $.ajax({
             type: "GET",
             url: this.serviceUrl + "/IsGranted",
@@ -36,13 +36,16 @@ var DataManipulationRight = NewClass({
                 sender.setRequestHeader("Password", DXTremeClient.currentUser.Password());
             },
             success: function (data) {
-                var isGranted = data.d.IsGranted;
-                var result = (isGranted === 'true');
-                return result;
+                if (callbackHandler) {
+                    callbackHandler(data.d.IsGranted);
+                }
+                result = data.d.IsGranted;
             },
             error: function (xhr, status, error) {
                 alert(error);
-                return false;
+                if (callbackHandler) {
+                    callbackHandler(false);
+                }
             }
         });
     }

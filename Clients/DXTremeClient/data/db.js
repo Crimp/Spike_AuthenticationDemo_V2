@@ -13,12 +13,11 @@
     // Remember claims based security should be only be used over HTTPS  
     var URL = "http://localhost:54002/CustomAuthenticationDataService.svc"
 
-
+    DXTremeClient.serviceUrl = URL;
     DXTremeClient.currentUser = {
         Password: ko.observable(""),
         UserName: ko.observable("")
     };
-    var errorHandler;
     DXTremeClient.db = new DevExpress.data.EntityStoreContext({
         service: {
             url: URL,
