@@ -1,5 +1,4 @@
 ﻿DXTremeClient.DetailView = function (params) {
-    var _oid;
     var model = {
         FirstName: ko.observable(),
         LastName: ko.observable(),
@@ -16,8 +15,8 @@
             if (CanEdit()) {
                 var uri = DXTremeClient.app.router.format({
                     action: "ContactEditView",
-                    oid: _oid,
-                    index: _oid
+                    oid: params.oid,
+                    index: params.oid
                 });
                 DXTremeClient.app.navigate(uri);
             }
@@ -35,7 +34,6 @@
         model.FirstName(list[0].FirstName);
         model.LastName(list[0].LastName);
         model.Email(list[0].Email);
-        _oid = list[0].oid;
     };
     return model;
 }

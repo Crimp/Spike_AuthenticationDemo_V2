@@ -39,7 +39,6 @@ var DataManipulationRight = NewClass({
                 if (callbackHandler) {
                     callbackHandler(data.d.IsGranted);
                 }
-                result = data.d.IsGranted;
             },
             error: function (xhr, status, error) {
                 alert(error);
