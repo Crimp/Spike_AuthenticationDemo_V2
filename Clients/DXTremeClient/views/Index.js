@@ -1,5 +1,5 @@
 ﻿DXTremeClient.index = function (params) {
-    var handleTripListItemClick = function (e) {
+    var handleContactListItemClick = function (e) {
         var uri = DXTremeClient.app.router.format({
             action: "DetailView",
             oid: e.itemData.oid
@@ -11,11 +11,19 @@
         DXTremeClient.currentUser.Password("");
         DXTremeClient.app.navigate("LogOn/null");
     };
+    var displayImage = function (base64Data) {
+        var imag = "<img "
+                 + "src='" + "data:image/jpg;base64,"
+                 + base64Data + "' width=\"60\" height=\"60\"/>";
+
+        $("#divImageHolder").html(imag)
+    };
     return {
         todoLists: {
             store: DXTremeClient.db.Contact
         },
-        handleTripListItemClick: handleTripListItemClick,
+        handleContactListItemClick: handleContactListItemClick,
         handleLogOffClick: handleLogOffClick,
+        displayImage: displayImage,
     };
 };

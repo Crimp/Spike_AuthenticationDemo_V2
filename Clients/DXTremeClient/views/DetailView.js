@@ -4,11 +4,12 @@
         LastName: ko.observable(),
         Email: ko.observable(),
         CanEdit: CanEdit = ko.observable(false),
+        ObjectType: ko.observable(),
         handleBackClick: function (e) {
             DXTremeClient.app.navigate("_back");
         },
-        canEdit: canEdit = function (callbackHandler) {
-            DXTremeClient.DataManipulationRight.IsGranted(DXTremeClient.entities.Contact.className, "", params.oid, "Write", callbackHandler);
+        canEdit: function (callbackHandler) {
+            DXTremeClient.DataManipulationRight.IsGranted(model.ObjectType(), "", params.oid, "Write", callbackHandler);
         },
         handleEditClick: function (e) {
             if (CanEdit()) {
@@ -20,12 +21,9 @@
                 DXTremeClient.app.navigate(uri);
             }
         },
-        viewShowing: function () {
-            canEdit(CanEdit);
-        },
         viewShown: function () {
             DXTremeClient.db.Contact.load({
-                filter: ["oid", new DevExpress.data.Guid(params.oid)]
+                filter: [DXTremeClient.db.Contact._key, new DevExpress.data.Guid(params.oid)]
             }).done(createDetailContent);
         }
     };
@@ -33,6 +31,16 @@
         model.FirstName(list[0].FirstName);
         model.LastName(list[0].LastName);
         model.Email(list[0].Email);
+        displayImage(list[0].Photo)
+        model.ObjectType(list[0].__metadata.type);
+        model.canEdit(CanEdit);
+    };
+    var displayImage = function (base64Data) {
+        var imag = "<img "
+                 + "src='" + "data:image/jpg;base64,"
+                 + base64Data + "' style=\"width: 100%;\"/>";
+
+        $("#divImageHolder").html(imag)
     };
     return model;
 }

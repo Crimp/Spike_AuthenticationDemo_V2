@@ -12,7 +12,6 @@ using System.Threading.Tasks;
 
 namespace BusinessObjectsLibrary {
     [DefaultClassOptions]
-    //[NavigationItem]
     public class Contact : BaseObject {
         string firstName;
         string lastName;
@@ -46,7 +45,7 @@ namespace BusinessObjectsLibrary {
                 SetPropertyValue("Email", ref email, value);
             }
         }
-        [Size(SizeAttribute.Unlimited), Delayed(true), ValueConverter(typeof(ImageValueConverter))]
+        [Size(SizeAttribute.Unlimited), ValueConverter(typeof(ImageValueConverter))]
         public Image Photo {
             get { return GetDelayedPropertyValue<Image>("Photo"); }
             set { SetDelayedPropertyValue<Image>("Photo", value); }

@@ -33,7 +33,7 @@
         model.Email(list[0].Email);
     };
     DXTremeClient.db.Contact.load({
-        filter: ["oid", new DevExpress.data.Guid(params.oid)]
+        filter: [DXTremeClient.db.Contact._key, new DevExpress.data.Guid(params.oid)]
     }).done(createDetailContent);
     return model;
 }

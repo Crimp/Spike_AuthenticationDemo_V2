@@ -22,7 +22,7 @@ namespace DataProvider {
         private static List<string> serviceOperations = new List<string>();
         private DataServiceHelper _dataServiceHelper;
         public DataServiceBase(HttpContextBase httpContext, DataServiceHelper dataServiceHelper, string containerName) :
-            base(new XpoContext(containerName, dataServiceHelper.NamespaceName, dataServiceHelper.CreateDataLayer())) {
+            base(new MyContext(containerName, dataServiceHelper.NamespaceName, dataServiceHelper.CreateDataLayer())) {
             if((httpContext == null) && (HttpContext.Current == null)) {
                 throw new ArgumentNullException("context", "The context cannot be null if not running on a Web context.");
             }
