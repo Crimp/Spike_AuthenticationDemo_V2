@@ -40,7 +40,7 @@
                  + "src='" + "data:image/jpg;base64,"
                  + base64Data + "' style=\"width: 100%;\"/>";
 
-        $("#divImageHolder").html(imag)
+        $("#divContactDetailImageHolder").html(imag)
     };
     return model;
 }
