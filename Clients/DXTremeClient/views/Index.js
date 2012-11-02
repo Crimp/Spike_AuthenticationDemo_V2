@@ -14,7 +14,7 @@
     };
     var getImageUrl = function (base64Data) {
         if (!base64Data) {
-            return "";
+            return "images/NoImage.jpg";
         }
         return "data:image/jpg;base64," + base64Data;
     };

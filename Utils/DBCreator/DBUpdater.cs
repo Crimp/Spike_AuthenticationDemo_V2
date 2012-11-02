@@ -93,6 +93,7 @@ namespace DBCreator {
                 SecuritySystemTypePermissionObject typePermissions = objectSpace.CreateObject<SecuritySystemTypePermissionObject>();
                 typePermissions.TargetType = typeof(Contact);
                 typePermissions.AllowNavigate = true;
+                typePermissions.AllowRead = true;
                 typePermissions.Save();
                 userRole.TypePermissions.Add(typePermissions);
 
