@@ -57,9 +57,6 @@
       <SubType>Content</SubType>
     </Content>
     <Content Include="data\db.js" />
-    <Content Include="images\myPhoto.jpg">
-      <SubType>Content</SubType>
-    </Content>
     <Content Include="layouts\Navbar\NavbarLayout.css" />
     <Content Include="layouts\Navbar\NavbarLayout.html" />
     <Content Include="layouts\Navbar\NavbarLayout.js" />
