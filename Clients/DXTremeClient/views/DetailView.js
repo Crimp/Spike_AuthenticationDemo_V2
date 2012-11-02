@@ -6,6 +6,7 @@
         Photo: ko.observable("noimage"),
         CanEdit: CanEdit = ko.observable(false),
         ObjectType: ko.observable(),
+        UILevelSecurity: UILevelSecurity = ko.observable(true),
         handleBackClick: function (e) {
             DXTremeClient.app.navigate("_back");
         },
@@ -13,14 +14,14 @@
             DXTremeClient.DataManipulationRight.IsGranted(model.ObjectType(), "", params.oid, "Write", callbackHandler);
         },
         handleEditClick: function (e) {
-            if (CanEdit()) {
+            //if (CanEdit() || !UILevelSecurity()) {
                 var uri = DXTremeClient.app.router.format({
                     action: "ContactEditView",
                     oid: params.oid,
                     index: params.oid
                 });
                 DXTremeClient.app.navigate(uri);
-            }
+            //}
         },
         viewShown: function () {
             DXTremeClient.db.Contact.load({
