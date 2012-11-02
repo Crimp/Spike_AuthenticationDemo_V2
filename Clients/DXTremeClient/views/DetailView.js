@@ -3,6 +3,7 @@
         FirstName: ko.observable(),
         LastName: ko.observable(),
         Email: ko.observable(),
+        Photo: ko.observable("noimage"),
         CanEdit: CanEdit = ko.observable(false),
         ObjectType: ko.observable(),
         handleBackClick: function (e) {
@@ -31,16 +32,12 @@
         model.FirstName(list[0].FirstName);
         model.LastName(list[0].LastName);
         model.Email(list[0].Email);
-        displayImage(list[0].Photo)
+        model.Photo(getImageUrl(list[0].Photo));
         model.ObjectType(list[0].__metadata.type);
         model.canEdit(CanEdit);
     };
-    var displayImage = function (base64Data) {
-        var imag = "<img "
-                 + "src='" + "data:image/jpg;base64,"
-                 + base64Data + "' style=\"width: 100%;\"/>";
-
-        $("#divContactDetailImageHolder").html(imag)
+    var getImageUrl = function (base64Data) {
+        return "data:image/jpg;base64," + base64Data;
     };
     return model;
 }
