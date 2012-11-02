@@ -13,6 +13,7 @@ using System.ServiceModel.Web;
 using System.Web;
 
 namespace CustomAuthenticationService {
+    [JSONPSupportBehaviorAttribute]
     public class CustomAuthenticationDataService : DataServiceBase {
         static CustomAuthenticationDataService() {
             AddServiceOperation("IsGranted");
@@ -29,9 +30,8 @@ namespace CustomAuthenticationService {
         }
         [WebGet]
         public bool IsGranted(string objectType, string memberName, string objectHandle, string operation) {
-            Type test = Type.GetType(objectType);
-            Type test2 = XafTypesInfo.Instance.FindTypeInfo(objectType).Type;
-            return ((IRequestSecurity)SecuritySystem.Instance).IsGranted(new ClientPermissionRequest(test2, memberName, objectHandle, operation));
+            Type type = XafTypesInfo.Instance.FindTypeInfo(objectType).Type;
+            return ((IRequestSecurity)SecuritySystem.Instance).IsGranted(new ClientPermissionRequest(type, memberName, objectHandle, operation));
         }
         [WebGet]
         public bool IsUserAllowed() {

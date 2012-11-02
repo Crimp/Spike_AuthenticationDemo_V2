@@ -14,14 +14,12 @@
             DXTremeClient.DataManipulationRight.IsGranted(model.ObjectType(), "", params.oid, "Write", callbackHandler);
         },
         handleEditClick: function (e) {
-            //if (CanEdit() || !UILevelSecurity()) {
-                var uri = DXTremeClient.app.router.format({
-                    action: "ContactEditView",
-                    oid: params.oid,
-                    index: params.oid
-                });
-                DXTremeClient.app.navigate(uri);
-            //}
+            var uri = DXTremeClient.app.router.format({
+                action: "ContactEditView",
+                oid: params.oid,
+                index: params.oid
+            });
+            DXTremeClient.app.navigate(uri);
         },
         viewShown: function () {
             DXTremeClient.db.Contact.load({
@@ -33,15 +31,9 @@
         model.FirstName(list[0].FirstName);
         model.LastName(list[0].LastName);
         model.Email(list[0].Email);
-        model.Photo(getImageUrl(list[0].Photo));
+        model.Photo(DXTremeClient.getImageUrl(list[0].Photo));
         model.ObjectType(list[0].__metadata.type);
         model.canEdit(CanEdit);
-    };
-    var getImageUrl = function (base64Data) {
-        if (!base64Data) {
-            return "images/NoImage.jpg";
-        }
-        return "data:image/jpg;base64," + base64Data;
     };
     return model;
 }

@@ -16,7 +16,7 @@ var NewClass = function (variables, constructor, functions) {
     retn.prototype.__construct = constructor;
     return retn;
 }
-
+var mycallback = function (data) { }
 var DataManipulationRight = NewClass({
 }, function (serviceUrl) {
     this.serviceUrl = serviceUrl;
@@ -30,19 +30,17 @@ var DataManipulationRight = NewClass({
         this.ajaxRequest(null, "IsUserAllowed", callbackHandler);
     },
     "ajaxRequest": function (_data, serviceOperationName, callbackHandler) {
+        var userCredentials = "&UserName=" + DXTremeClient.currentUser.UserName() + "&Password=" + DXTremeClient.currentUser.Password() + "";
+        var _url = this.serviceUrl + "/" + serviceOperationName + "?$format=json&$callback=mycallback" + userCredentials;
         $.ajax({
             type: "GET",
-            url: this.serviceUrl + "/" + serviceOperationName,
+            url: this.serviceUrl + "/" + serviceOperationName + "?$format=json&$callback=mycallback" + userCredentials,
             data: _data,
             async: true,
             timeout: 10000,
             contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            beforeSend: function (sender) {
-                sender.setRequestHeader("Accept", "application/json;odata=verbose");
-                sender.setRequestHeader("UserName", DXTremeClient.currentUser.UserName());
-                sender.setRequestHeader("Password", DXTremeClient.currentUser.Password());
-            },
+            jsonpCallback: "mycallback",
+            dataType: "jsonp",
             success: function (data) {
                 if (callbackHandler) {
                     callbackHandler(data.d[serviceOperationName]);
@@ -54,5 +52,8 @@ var DataManipulationRight = NewClass({
                 }
             }
         });
+    },
+    mycallback: function (data) {
+
     }
 });

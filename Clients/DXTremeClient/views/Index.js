@@ -12,12 +12,6 @@
         DXTremeClient.currentUser.Password("");
         DXTremeClient.app.navigate("LogOn/null");
     };
-    var getImageUrl = function (base64Data) {
-        if (!base64Data) {
-            return "images/NoImage.jpg";
-        }
-        return "data:image/jpg;base64," + base64Data;
-    };
     return {
         contacts: contacts,
         handleContactListItemClick: handleContactListItemClick,
@@ -32,7 +26,7 @@
                         oid: contact.oid,
                         FirstName: contact.FirstName,
                         LastName: contact.LastName,
-                        Photo: getImageUrl(contact.Photo)
+                        Photo: DXTremeClient.getImageUrl(contact.Photo)
                     }
                 }));
             });
