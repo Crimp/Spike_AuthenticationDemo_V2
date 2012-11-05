@@ -14,7 +14,7 @@ namespace DBCreator {
 #if AzureRelease
                 string connectionString = ConfigurationManager.ConnectionStrings["AzureApplicationServices"].ConnectionString;
 #else
-                string connectionString = ConfigurationManager.ConnectionStrings["ApplicationServices_IIS"].ConnectionString;
+                string connectionString = ConfigurationManager.ConnectionStrings["ApplicationServices"].ConnectionString;
 #endif
                 DBUpdater updater = new DBUpdater(connectionString, new Assembly[] { typeof(Contact).Assembly });
                 updater.CreateDB();

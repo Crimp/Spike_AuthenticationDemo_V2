@@ -1,6 +1,5 @@
 ﻿DXTremeClient.DetailView = function (params) {
     var model = {
-        //CanReadMembers
         FirstName: ko.observable(),
         LastName: ko.observable(),
         Email: ko.observable(),
@@ -12,8 +11,7 @@
             DXTremeClient.app.navigate("_back");
         },
         canEdit: function (callbackHandler) {
-            var dataManipulationRight = DataManipulationRight(DXTremeClient.serviceUrl);
-            dataManipulationRight.IsGranted(model.ObjectType(), "", params.oid, "Write", callbackHandler);
+            DXTremeClient.DataManipulationRight.IsGranted(model.ObjectType(), "", params.oid, "Write", callbackHandler);
         },
         handleEditClick: function (e) {
             var uri = DXTremeClient.app.router.format({
@@ -34,8 +32,7 @@
 
         var mambers = new Array("LastName", "Email");
         var oids = new Array(params.oid);
-        var dataManipulationRight = DataManipulationRight(DXTremeClient.serviceUrl);
-        dataManipulationRight.CanReadMembers(model.ObjectType(), mambers, oids, loadData);
+        DXTremeClient.DataManipulationRight.CanReadMembers(model.ObjectType(), mambers, oids, loadData);
 
         model.FirstName(list[0].FirstName);
         model.LastName(list[0].LastName);

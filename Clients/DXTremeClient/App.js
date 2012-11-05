@@ -7,11 +7,11 @@ $(function () {
     //var URL = "http://127.0.0.1:81/CustomAuthenticationDataService.svc"
 
     //Local IIS
-    var URL = "http://minakov-w8.corp.devexpress.com/CustomAuthenticationService/CustomAuthenticationDataService.svc"
+    //var URL = "http://minakov-w8.corp.devexpress.com/CustomAuthenticationService/CustomAuthenticationDataService.svc"
 
     //Local webDev
     // Remember claims based security should be only be used over HTTPS  
-    //var URL = "http://localhost:54002/CustomAuthenticationDataService.svc"
+    var URL = "http://localhost:54002/CustomAuthenticationDataService.svc"
 
     DXTremeClient.serviceUrl = URL;
     DXTremeClient.getImageUrl = function (base64Data) {
