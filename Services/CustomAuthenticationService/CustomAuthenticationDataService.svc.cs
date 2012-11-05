@@ -40,11 +40,11 @@ namespace CustomAuthenticationService {
             List<string> _targetObjectsHandle = new List<string>(targetObjectsHandle.Split(';'));
             Type type = XafTypesInfo.Instance.FindTypeInfo(objectType).Type;
             Dictionary<string, bool> canReadMembers = ((IRequestSecurity)SecuritySystem.Instance).CanReadMembers(type.AssemblyQualifiedName, _membersName, _targetObjectsHandle);
-            string result = "";
+            List<string> result = new List<string>();
             foreach(KeyValuePair<string, bool> item in canReadMembers) {
-                result += item.Key + "," + item.Value + ";";
+                result.Add(item.Key + "," + item.Value);
             }
-            return result;
+            return string.Join(";", result.ToArray());
         }
         [WebGet]
         public bool IsUserAllowed() {

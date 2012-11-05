@@ -41,7 +41,13 @@
         model.canEdit(CanEdit);
     };
     var loadData = function(data){
-
+        var objectHandle =  model.ObjectType() + "(" + params.oid + ")";
+        if (data[(objectHandle + "LastName")] === "False") {
+            model.LastName("Protected Content");
+        }
+        if (data[(objectHandle + "Email")] === "False") {
+            model.Email("Protected Content");
+        }
     }
     return model;
 }

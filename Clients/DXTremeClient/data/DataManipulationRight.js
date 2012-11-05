@@ -35,7 +35,16 @@ var DataManipulationRight = NewClass({
             oids[key] = objectType + "(" + oids[key] + ")";
         }
         var _data = "objectType='" + objectType + "'&membersName='" + membersName.join(";") + "'&targetObjectsHandle='" + oids.join(";") + "'";
-        this.ajaxRequest(_data, "CanReadMembers", callbackHandler, "canReadMembersCallBack");
+        var callbackHandlerWrapper = function (data) {
+            var dataResult = data.split(";");
+            var canReadMembers = new Array();
+            for (var key in dataResult) {
+                var keyValue = dataResult[key].split(",");
+                canReadMembers[keyValue[0]] = keyValue[1];
+            }
+            callbackHandler(canReadMembers);
+        }
+        this.ajaxRequest(_data, "CanReadMembers", callbackHandlerWrapper, "canReadMembersCallBack");
     },
     "ajaxRequest": function (_data, serviceOperationName, callbackHandler, callbackMethodName) {
         var userCredentials = "&UserName=" + DXTremeClient.currentUser.UserName() + "&Password=" + DXTremeClient.currentUser.Password() + "";
