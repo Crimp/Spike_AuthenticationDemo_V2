@@ -18,6 +18,7 @@ namespace CustomAuthenticationService {
         static CustomAuthenticationDataService() {
             AddServiceOperation("IsGranted");
             AddServiceOperation("IsUserAllowed");
+            AddServiceOperation("CanReadMembers");
         }
         public CustomAuthenticationDataService()
             : this(new HttpContextWrapper(HttpContext.Current)) {
@@ -32,6 +33,18 @@ namespace CustomAuthenticationService {
         public bool IsGranted(string objectType, string memberName, string objectHandle, string operation) {
             Type type = XafTypesInfo.Instance.FindTypeInfo(objectType).Type;
             return ((IRequestSecurity)SecuritySystem.Instance).IsGranted(new ClientPermissionRequest(type, memberName, objectHandle, operation));
+        }
+        [WebGet]
+        public string CanReadMembers(string objectType, string membersName, string targetObjectsHandle) {
+            List<string> _membersName = new List<string>(membersName.Split(';'));
+            List<string> _targetObjectsHandle = new List<string>(targetObjectsHandle.Split(';'));
+            Type type = XafTypesInfo.Instance.FindTypeInfo(objectType).Type;
+            Dictionary<string, bool> canReadMembers = ((IRequestSecurity)SecuritySystem.Instance).CanReadMembers(type.AssemblyQualifiedName, _membersName, _targetObjectsHandle);
+            string result = "";
+            foreach(KeyValuePair<string, bool> item in canReadMembers) {
+                result += item.Key + "," + item.Value + ";";
+            }
+            return result;
         }
         [WebGet]
         public bool IsUserAllowed() {

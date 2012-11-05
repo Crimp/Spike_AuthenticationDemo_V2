@@ -16,7 +16,12 @@ var NewClass = function (variables, constructor, functions) {
     retn.prototype.__construct = constructor;
     return retn;
 }
-var mycallback = function (data) { }
+var canReadMembersCallBack = function (data) {
+
+}
+var mycallback = function (data) {
+
+}
 var DataManipulationRight = NewClass({
 }, function (serviceUrl) {
     this.serviceUrl = serviceUrl;
@@ -24,14 +29,44 @@ var DataManipulationRight = NewClass({
     "IsGranted": function (objectType, memberName, oid, operation, callbackHandler) {
         var objectHandle = objectType + "(" + oid + ")";
         var _data = "objectType='" + objectType + "'&memberName='" + memberName + "'&objectHandle='" + objectHandle + "'&operation='" + operation + "'";
-        this.ajaxRequest(_data, "IsGranted", callbackHandler);
+        this.ajaxRequest(_data, "IsGranted", callbackHandler, "mycallback");
     },
     "IsUserAllowed": function (callbackHandler) {
-        this.ajaxRequest(null, "IsUserAllowed", callbackHandler);
+        this.ajaxRequest(null, "IsUserAllowed", callbackHandler, "mycallback");
     },
-    "ajaxRequest": function (_data, serviceOperationName, callbackHandler) {
+    "CanReadMembers": function (objectType, membersName, oids, operation, callbackHandler) { //membersName and oids is string[]
+        for (var key in oids) {
+            oids[key] = objectType + "(" + oids[key] + ")";
+        }
+        
+        var _data = "objectType='" + objectType + "'&membersName='" + membersName.join(";") + "'&targetObjectsHandle='" + oids.join(";") + "'";
+        this.ajaxRequest(_data, "IsGranted", callbackHandler, "canReadMembersCallBack");
+        //var userCredentials = "&UserName=" + DXTremeClient.currentUser.UserName() + "&Password=" + DXTremeClient.currentUser.Password() + "";
+        //var _url = this.serviceUrl + "/" + "CanReadMembers" + "?$format=json&$callback=canReadMembersCallBack" + userCredentials;
+        //$.ajax({
+        //    type: "GET",
+        //    url: _url,
+        //    data: _data,
+        //    async: true,
+        //    timeout: 10000,
+        //    contentType: "application/json; charset=utf-8",
+        //    jsonpCallback: "canReadMembersCallBack",
+        //    dataType: "jsonp",
+        //    success: function (data) {
+        //        if (callbackHandler) {
+        //            callbackHandler(data.d["CanReadMembers"]);
+        //        }
+        //    },
+        //    error: function (xhr, status, error) {
+        //        if (callbackHandler) {
+        //            callbackHandler(false);
+        //        }
+        //    }
+        //})
+    },
+    "ajaxRequest": function (_data, serviceOperationName, callbackHandler, callbackMethodName) {
         var userCredentials = "&UserName=" + DXTremeClient.currentUser.UserName() + "&Password=" + DXTremeClient.currentUser.Password() + "";
-        var _url = this.serviceUrl + "/" + serviceOperationName + "?$format=json&$callback=mycallback" + userCredentials;
+        var _url = this.serviceUrl + "/" + serviceOperationName + "?$format=json&$callback=" + callbackMethodName + userCredentials;
         $.ajax({
             type: "GET",
             url: _url,
@@ -39,7 +74,7 @@ var DataManipulationRight = NewClass({
             async: true,
             timeout: 10000,
             contentType: "application/json; charset=utf-8",
-            jsonpCallback: "mycallback",
+            jsonpCallback: callbackMethodName,
             dataType: "jsonp",
             success: function (data) {
                 if (callbackHandler) {
@@ -52,8 +87,5 @@ var DataManipulationRight = NewClass({
                 }
             }
         });
-    },
-    mycallback: function (data) {
-
     }
 });

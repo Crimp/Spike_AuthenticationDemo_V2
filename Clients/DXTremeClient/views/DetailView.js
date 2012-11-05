@@ -1,5 +1,6 @@
 ﻿DXTremeClient.DetailView = function (params) {
     var model = {
+        //CanReadMembers
         FirstName: ko.observable(),
         LastName: ko.observable(),
         Email: ko.observable(),
@@ -11,7 +12,8 @@
             DXTremeClient.app.navigate("_back");
         },
         canEdit: function (callbackHandler) {
-            DXTremeClient.DataManipulationRight.IsGranted(model.ObjectType(), "", params.oid, "Write", callbackHandler);
+            var dataManipulationRight = DataManipulationRight(DXTremeClient.serviceUrl);
+            dataManipulationRight.IsGranted(model.ObjectType(), "", params.oid, "Write", callbackHandler);
         },
         handleEditClick: function (e) {
             var uri = DXTremeClient.app.router.format({
@@ -28,12 +30,21 @@
         }
     };
     var createDetailContent = function (list) {
+        model.ObjectType(list[0].__metadata.type);
+
+        var mambers = new Array("LastName", "Email");
+        var oids = new Array(params.oid);
+        var dataManipulationRight = DataManipulationRight(DXTremeClient.serviceUrl);
+        dataManipulationRight.CanReadMembers(model.ObjectType(), mambers, oids, loadData);
+
         model.FirstName(list[0].FirstName);
         model.LastName(list[0].LastName);
         model.Email(list[0].Email);
         model.Photo(DXTremeClient.getImageUrl(list[0].Photo));
-        model.ObjectType(list[0].__metadata.type);
         model.canEdit(CanEdit);
     };
+    var loadData = function(data){
+
+    }
     return model;
 }
