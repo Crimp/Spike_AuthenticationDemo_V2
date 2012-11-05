@@ -34,7 +34,7 @@ var DataManipulationRight = NewClass({
         var _url = this.serviceUrl + "/" + serviceOperationName + "?$format=json&$callback=mycallback" + userCredentials;
         $.ajax({
             type: "GET",
-            url: this.serviceUrl + "/" + serviceOperationName + "?$format=json&$callback=mycallback" + userCredentials,
+            url: _url,
             data: _data,
             async: true,
             timeout: 10000,

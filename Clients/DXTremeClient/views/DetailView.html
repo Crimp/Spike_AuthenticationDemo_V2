@@ -24,7 +24,7 @@
             <div class="dx-field-value" data-bind="text: Email"></div>
         </div>
         <img data-bind="attr: { src: Photo }" width="200" height="200" />
-        <div class="dx-field">
+        <div class="dx-field" data-bind="visible: !CanEdit()">
             <div class="dx-field-key">UI Level Security</div>
             <div class="dx-field-value" data-bind="dxSwitch: { value: UILevelSecurity }"></div>
         </div>
