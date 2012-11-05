@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ServiceConfiguration serviceName="CustomAuthenticationService.Azure" xmlns="http://schemas.microsoft.com/ServiceHosting/2008/10/ServiceConfiguration" osFamily="1" osVersion="*" schemaVersion="2012-05.1.7">
+  <Role name="CustomAuthenticationService">
+    <Instances count="1" />
+    <ConfigurationSettings>
+      <Setting name="Microsoft.WindowsAzure.Plugins.Diagnostics.ConnectionString" value="UseDevelopmentStorage=true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.Enabled" value="true" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountUsername" value="minakov" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountEncryptedPassword" value="MIIBnQYJKoZIhvcNAQcDoIIBjjCCAYoCAQAxggFOMIIBSgIBADAyMB4xHDAaBgNVBAMME1dpbmRvd3MgQXp1cmUgVG9vbHMCEB1yllLmmhi0T1Y5ipX1U/wwDQYJKoZIhvcNAQEBBQAEggEAjnkUBANgTeguc2HIHArKb4fS//xfmiIP2UxIPx2Sjrtsd4mC7JP8fwulFi1hQMMCogeFEOtaUs4rMpDAagBBWH/xq/QSISmU7qwqWqJspnL0YwgYlmerci1HCQRw2hSnxaOq58X1VW+TN6Jghpx0hugusVDLc+UEmk5WHHzDPsh0D7CUA34SbHVd1iEJx8Xq9wOfbEMnUkntYauf7Y7W41urjSOXokEA73ZaZ0FAvLeCi9CpOMOft+YlWkH30sHHkSmvE10ZSH9RC3HvMqMt8jw9hIFjgJcoXPpGQR09ySg/EbsF2tWDRozrY/LCpmsNTobjETzaTZKDrP2d2fu7WTAzBgkqhkiG9w0BBwEwFAYIKoZIhvcNAwcECHK04wQlqULAgBBE29mcSfNpI+Jcm7jgi+iB" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteAccess.AccountExpiration" value="2013-11-05T23:59:59.0000000+04:00" />
+      <Setting name="Microsoft.WindowsAzure.Plugins.RemoteForwarder.Enabled" value="true" />
+    </ConfigurationSettings>
+    <Certificates>
+      <Certificate name="Microsoft.WindowsAzure.Plugins.RemoteAccess.PasswordEncryption" thumbprint="8C8D56BBF3CB8E339A61352EE8B8DB0ED37A2DFC" thumbprintAlgorithm="sha1" />
+    </Certificates>
+  </Role>
+</ServiceConfiguration>
