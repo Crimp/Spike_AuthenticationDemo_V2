@@ -1,5 +1,6 @@
 ﻿using BusinessObjectsLibrary;
 using DataProvider;
+using DBCreator.Properties;
 using DevExpress.Data.Filtering;
 using DevExpress.ExpressApp;
 using DevExpress.ExpressApp.Security;
@@ -27,7 +28,7 @@ namespace DBCreator {
         public void CreateDB() {
             CreateTestData();
         }
-        public void AddNewUser(string userName, string lastName, string email, string password) {
+        public void AddNewUser(string userName, string lastName, string email, System.Drawing.Image photo, string password) {
             string criteria = string.Format("UserName == '{0}'", userName);
             SecuritySystemUser newUser = objectSpace.FindObject<SecuritySystemUser>(CriteriaOperator.Parse(criteria));
             if(newUser == null) {
@@ -40,9 +41,9 @@ namespace DBCreator {
                 newUser.Save();
                 objectSpace.CommitChanges();
             }
-            AddContact(userName, lastName, email, newUser.Oid);
+            AddContact(userName, lastName, email, photo, newUser.Oid);
         }
-        public void AddContact(string firstName, string lastName, string email, Guid ownerId) {
+        public void AddContact(string firstName, string lastName, string email, System.Drawing.Image photo, Guid ownerId) {
             string criteria = string.Format("FirstName == '{0}' && LastName == '{1}'", firstName, lastName);
             Contact newUserContact = objectSpace.FindObject<Contact>(CriteriaOperator.Parse(criteria));
             if(newUserContact == null) {
@@ -51,6 +52,7 @@ namespace DBCreator {
                 newUserContact.LastName = lastName;
                 newUserContact.Email = email;
                 newUserContact.OwnerId = ownerId;
+                newUserContact.Photo = photo;
                 objectSpace.CommitChanges();
             }
         }
@@ -59,12 +61,11 @@ namespace DBCreator {
             CreateUserRole();
             objectSpace.CommitChanges();
 
-            //AddNewUser("Mary", "Tellitson", "mary_tellitson@md.com", "mary");
-            AddContact("Read-Only", "Read-Only", "Read-Only@md.com", Guid.NewGuid());
-            AddNewUser("Sam", "Tellitson", "sam_tellitson@md.com", "");
-            AddNewUser("John", "Nilsen", "john_nilsen@md.com", "");
-            AddNewUser(WindowsIdentity.GetCurrent().Name, "", "", "");
-            AddNewUser("Test2", "Test2", "Test2@md.com", "Test2");
+            AddContact("Mary", "Tellitson", "mary_tellitson@md.com", null, Guid.NewGuid());
+            AddContact("Advanced User", "Protected", "Protected Object.com", null, Guid.NewGuid());
+            AddNewUser("Sam", "Tellitson", "sam_tellitson@md.com", Resource.Sam, "");
+            AddNewUser("John", "Nilsen", "john_nilsen@md.com", Resource.John, "");
+            //AddNewUser(WindowsIdentity.GetCurrent().Name, "", "", null, "");
 
             objectSpace.CommitChanges();
         }
@@ -93,26 +94,29 @@ namespace DBCreator {
                 SecuritySystemTypePermissionObject typePermissions = objectSpace.CreateObject<SecuritySystemTypePermissionObject>();
                 typePermissions.TargetType = typeof(Contact);
                 typePermissions.AllowNavigate = true;
-                typePermissions.AllowRead = true;
                 typePermissions.Save();
                 userRole.TypePermissions.Add(typePermissions);
 
+                SecuritySystemMemberPermissionsObject readOnlyMemberPermission = objectSpace.CreateObject<SecuritySystemMemberPermissionsObject>();
+                readOnlyMemberPermission.Members = "FirstName; Photo";
+                readOnlyMemberPermission.AllowRead = true;
+                readOnlyMemberPermission.Save();
+                typePermissions.MemberPermissions.Add(readOnlyMemberPermission);
+
                 SecuritySystemObjectPermissionsObject fullAccessObjectPermission = objectSpace.CreateObject<SecuritySystemObjectPermissionsObject>();
                 fullAccessObjectPermission.Criteria = "[OwnerId] = CurrentUserId()";
-                //fullAccessObjectPermission.AllowDelete = true;
                 fullAccessObjectPermission.AllowNavigate = true;
                 fullAccessObjectPermission.AllowRead = true;
                 fullAccessObjectPermission.AllowWrite = true;
                 fullAccessObjectPermission.Save();
                 typePermissions.ObjectPermissions.Add(fullAccessObjectPermission);
 
-
-                SecuritySystemObjectPermissionsObject readOnlyObjectPermission = objectSpace.CreateObject<SecuritySystemObjectPermissionsObject>();
-                readOnlyObjectPermission.Criteria = "[FirstName] Like '%Read-Only%'";
-                readOnlyObjectPermission.AllowNavigate = true;
-                readOnlyObjectPermission.AllowRead = true;
-                readOnlyObjectPermission.Save();
-                typePermissions.ObjectPermissions.Add(readOnlyObjectPermission);
+                SecuritySystemObjectPermissionsObject protectedContentObjectPermission = objectSpace.CreateObject<SecuritySystemObjectPermissionsObject>();
+                protectedContentObjectPermission.Criteria = "[LastName] Not Like '%Protected%'";
+                protectedContentObjectPermission.AllowNavigate = true;
+                protectedContentObjectPermission.AllowRead = true;
+                protectedContentObjectPermission.Save();
+                typePermissions.ObjectPermissions.Add(protectedContentObjectPermission);
             }
         }
     }
