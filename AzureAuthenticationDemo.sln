@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClientServer_Wcf_CustomAuth
 EndProject
 Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "CustomAuthenticationService.Azure", "CustomAuthenticationService.Azure\CustomAuthenticationService.Azure.ccproj", "{05FE049E-AB33-4424-A87F-17D20768FB5F}"
 EndProject
+Project("{CC5FD16D-436D-48AD-A40C-5A424C6E3E79}") = "ClientServer_Wcf_CustomAuth.Service.Azure", "ClientServer_Wcf_CustomAuth.Service.Azure\ClientServer_Wcf_CustomAuth.Service.Azure.ccproj", "{593D1D74-7112-4FA1-A113-17DCD9C921EF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		AzureDebug|Any CPU = AzureDebug|Any CPU
@@ -187,6 +189,18 @@ Global
 		{05FE049E-AB33-4424-A87F-17D20768FB5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05FE049E-AB33-4424-A87F-17D20768FB5F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{05FE049E-AB33-4424-A87F-17D20768FB5F}.Release|x86.ActiveCfg = Release|Any CPU
+		{593D1D74-7112-4FA1-A113-17DCD9C921EF}.AzureDebug|Any CPU.ActiveCfg = Debug|Any CPU
+		{593D1D74-7112-4FA1-A113-17DCD9C921EF}.AzureDebug|Any CPU.Build.0 = Debug|Any CPU
+		{593D1D74-7112-4FA1-A113-17DCD9C921EF}.AzureDebug|x86.ActiveCfg = Debug|Any CPU
+		{593D1D74-7112-4FA1-A113-17DCD9C921EF}.AzureRelease|Any CPU.ActiveCfg = Release|Any CPU
+		{593D1D74-7112-4FA1-A113-17DCD9C921EF}.AzureRelease|Any CPU.Build.0 = Release|Any CPU
+		{593D1D74-7112-4FA1-A113-17DCD9C921EF}.AzureRelease|x86.ActiveCfg = Release|Any CPU
+		{593D1D74-7112-4FA1-A113-17DCD9C921EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{593D1D74-7112-4FA1-A113-17DCD9C921EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{593D1D74-7112-4FA1-A113-17DCD9C921EF}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{593D1D74-7112-4FA1-A113-17DCD9C921EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{593D1D74-7112-4FA1-A113-17DCD9C921EF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{593D1D74-7112-4FA1-A113-17DCD9C921EF}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

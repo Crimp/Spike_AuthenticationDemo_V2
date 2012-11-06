@@ -33,10 +33,10 @@ namespace XafWinClient.Win {
             string connectionString = "http://CustomWcfSecuredDataServer.cloudapp.net/CustomWcfSecuredDataServer.svc";
 #else
 #if AzureDebug
-            //string connectionString = "http://127.0.0.1:81/CustomWcfSecuredDataServer.svc";
+            string connectionString = "http://127.0.0.1:81/CustomWcfSecuredDataServer.svc";
 #endif
 #endif
-            string connectionString = "http://localhost:63829/CustomWcfSecuredDataServer.svc";
+            //string connectionString = "http://localhost:63829/CustomWcfSecuredDataServer.svc";
             //
 
 

@@ -1,4 +1,4 @@
-﻿DXTremeClient.index = function (params) {
+﻿DXTremeClient.LisView = function (params) {
     var contacts = ko.observableArray();
     var handleContactListItemClick = function (e) {
         var uri = DXTremeClient.app.router.format({

@@ -44,7 +44,7 @@ var DataManipulationRight = NewClass({
         var callbackHandlerWrapper = function (data) {
             var canReadMembers = new Array();
             for (var key in data) {
-                var keyValue = data[key].split(",");
+                var keyValue = data[key].split(";");
                 canReadMembers[keyValue[0]] = keyValue[1];
             }
             callbackHandler(canReadMembers);

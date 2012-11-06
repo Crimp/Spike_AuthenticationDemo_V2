@@ -3296,37 +3296,3 @@
 {
   background: #fff;
 }
-
-.contact-icon {
-    display: inline-block;
-}
-.contact-info {
-    display: inline-block;
-}
-.contact-FirstName {
-    font-weight: bold;
-}
-.contact-LastName {
-    font-weight: normal;
-}
-
-#showButton, #hideButton {
-  margin-top: 25px;
-}
-#overlay
-{
-  border: solid 1px #444;
-  background: lightsteelblue;
-  padding: 10px;
-  text-align: center; 
-}
-
-#logonFailedoverlay
-{
-  border: solid 1px #444;
-  width: auto !important;
-  height: auto !important;
-  background: azure;
-  padding: 20px;
-  text-align: center; 
-}

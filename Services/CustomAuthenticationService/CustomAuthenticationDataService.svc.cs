@@ -42,9 +42,9 @@ namespace CustomAuthenticationService {
             Dictionary<string, bool> canReadMembers = ((IRequestSecurity)SecuritySystem.Instance).CanReadMembers(type.AssemblyQualifiedName, _membersName, _targetObjectsHandle);
             List<string> result = new List<string>();
             foreach(KeyValuePair<string, bool> item in canReadMembers) {
-                result.Add(item.Key + "," + item.Value);
+                result.Add(item.Key + ";" + item.Value);
             }
-            return result;// string.Join(";", result.ToArray());
+            return result;
         }
         [WebGet]
         public bool IsUserAllowed() {

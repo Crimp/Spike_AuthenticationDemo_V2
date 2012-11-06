@@ -38,5 +38,5 @@ $(function () {
     app.router.register("ContactEditView/:oid/:index", { view: "ContactEditView" });
     app.router.register("DetailView/:oid", { view: "DetailView" });
     app.router.register("LogOn/:oid", { view: "LogOn", oid: undefined });
-    app.router.register(":view", { view: "index" });
+    app.router.register(":view", { view: "LisView" });
 });
