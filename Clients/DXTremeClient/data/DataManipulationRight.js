@@ -25,10 +25,16 @@ var DataManipulationRight = NewClass({
     "IsGranted": function (objectType, memberName, oid, operation, callbackHandler) {
         var objectHandle = objectType + "(" + oid + ")";
         var _data = "objectType='" + objectType + "'&memberName='" + memberName + "'&objectHandle='" + objectHandle + "'&operation='" + operation + "'";
-        this.ajaxRequest(_data, "IsGranted", callbackHandler, "mycallback");
+        var callbackHandlerWrapper = function (data) {
+            callbackHandler(data["IsGranted"]);
+        }
+        this.ajaxRequest(_data, "IsGranted", callbackHandlerWrapper, "mycallback");
     },
     "IsUserAllowed": function (callbackHandler) {
-        this.ajaxRequest(null, "IsUserAllowed", callbackHandler, "mycallback");
+        var callbackHandlerWrapper = function (data) {
+            callbackHandler(data["IsUserAllowed"]);
+        }
+        this.ajaxRequest(null, "IsUserAllowed", callbackHandlerWrapper, "mycallback");
     },
     "CanReadMembers": function (objectType, membersName, oids, callbackHandler) { //membersName and oids is string[]
         for (var key in oids) {
@@ -36,10 +42,9 @@ var DataManipulationRight = NewClass({
         }
         var _data = "objectType='" + objectType + "'&membersName='" + membersName.join(";") + "'&targetObjectsHandle='" + oids.join(";") + "'";
         var callbackHandlerWrapper = function (data) {
-            var dataResult = data.split(";");
             var canReadMembers = new Array();
-            for (var key in dataResult) {
-                var keyValue = dataResult[key].split(",");
+            for (var key in data) {
+                var keyValue = data[key].split(",");
                 canReadMembers[keyValue[0]] = keyValue[1];
             }
             callbackHandler(canReadMembers);
@@ -47,8 +52,7 @@ var DataManipulationRight = NewClass({
         this.ajaxRequest(_data, "CanReadMembers", callbackHandlerWrapper, "canReadMembersCallBack");
     },
     "ajaxRequest": function (_data, serviceOperationName, callbackHandler, callbackMethodName) {
-        var userCredentials = "&UserName=" + DXTremeClient.currentUser.UserName() + "&Password=" + DXTremeClient.currentUser.Password() + "";
-        var _url = this.serviceUrl + "/" + serviceOperationName + "?$format=json&$callback=" + callbackMethodName + userCredentials;
+        var _url = this.serviceUrl + "/" + serviceOperationName + "?$format=json&$callback=" + callbackMethodName + this.userCredentials();
         $.ajax({
             type: "GET",
             url: _url,
@@ -60,14 +64,17 @@ var DataManipulationRight = NewClass({
             dataType: "jsonp",
             success: function (data) {
                 if (callbackHandler) {
-                    callbackHandler(data.d[serviceOperationName]);
+                    callbackHandler(data.d);
                 }
             },
             error: function (xhr, status, error) {
                 if (callbackHandler) {
-                    callbackHandler(false);
+                    callbackHandler(error);
                 }
             }
         });
+    },
+    "userCredentials": function () {
+        return "&UserName=" + DXTremeClient.currentUser.UserName() + "&Password=" + DXTremeClient.currentUser.Password() + "";
     }
 });

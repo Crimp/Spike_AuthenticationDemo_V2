@@ -35,7 +35,7 @@ namespace CustomAuthenticationService {
             return ((IRequestSecurity)SecuritySystem.Instance).IsGranted(new ClientPermissionRequest(type, memberName, objectHandle, operation));
         }
         [WebGet]
-        public string CanReadMembers(string objectType, string membersName, string targetObjectsHandle) {
+        public IEnumerable<string> CanReadMembers(string objectType, string membersName, string targetObjectsHandle) {
             List<string> _membersName = new List<string>(membersName.Split(';'));
             List<string> _targetObjectsHandle = new List<string>(targetObjectsHandle.Split(';'));
             Type type = XafTypesInfo.Instance.FindTypeInfo(objectType).Type;
@@ -44,7 +44,7 @@ namespace CustomAuthenticationService {
             foreach(KeyValuePair<string, bool> item in canReadMembers) {
                 result.Add(item.Key + "," + item.Value);
             }
-            return string.Join(";", result.ToArray());
+            return result;// string.Join(";", result.ToArray());
         }
         [WebGet]
         public bool IsUserAllowed() {
