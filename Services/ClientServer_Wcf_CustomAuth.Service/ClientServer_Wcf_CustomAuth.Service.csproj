@@ -93,7 +93,9 @@
   <ItemGroup>
     <Content Include="CustomWcfSecuredDataServer.svc" />
     <Content Include="Global.asax" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomAuthenticationServiceHelper.cs" />
